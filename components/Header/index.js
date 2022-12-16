@@ -11,7 +11,8 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Link from 'next/link';
-import Logo from '../../images/codeBlog.png'
+
+// Using this to route to each page
 const pages = [
     {
         label: 'Tasks',
@@ -21,7 +22,7 @@ const pages = [
         link: '/blog'
     }
 ];
-
+// Got this Navbar straight From https://mui.com/material-ui/react-app-bar/ 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);

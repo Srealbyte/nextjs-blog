@@ -2,7 +2,7 @@ import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
 import TaskCard from "../../components/TaskCard";
-
+// CSS styles
 const Container = styled.div`
     margin-top: 20px;
     display: flex;
@@ -29,17 +29,25 @@ const List= styled.div`
     flex-direction: column;
     margin-top: 20px;
 `
+// ID Variable
 let count = 1
+// Variable used to validate the text box
+let isTodoValid = false
+
 function Task() {
+    //React Hooks
     const [tasks, setTasks] = useState([])
     const [inputValue,setInputValue] = useState("")
-
+    
+    //Changes in the input field call the setter
     const handleInputChange = (event) => {
+        isTodoValid = !!event.target.value
         setInputValue(event.target.value)
     }
     
-
+    //On click pass in the new Tasks Title,
     const handleInputClick = ()  => {
+        
         setTasks(
             [
                 ...tasks,
@@ -52,8 +60,9 @@ function Task() {
         )
         count ++
         setInputValue('')
+        isTodoValid = false
     }
-
+    //On click inverse the isDone boolean value of the given Id
     const toggleDone = (id) => {
         const newTasks = tasks.map(task => {
             if(task.id === id) {
@@ -67,12 +76,17 @@ function Task() {
         setTasks(newTasks)
     }
 
+    
+    /* Got the Two Components from MUI: TextField, Button
+    disabled the add button empty Task Entry
+    
+    */
     return (
         <Container>
             <div className= 'task'>
                 <Input>
-                    <TextField value={inputValue} onChange={handleInputChange} id="outlined-basic" label="Todo item" variant="outlined" />
-                    <Button onClick={handleInputClick} variant="contained">Add</Button>
+                    <TextField value={inputValue} onChange={handleInputChange} id="outlined-basic" label="Task" variant="outlined" />
+                    <Button onClick={handleInputClick} variant="contained"disabled={!isTodoValid}>Add</Button>
                 </Input>
                 <List>
                     {
